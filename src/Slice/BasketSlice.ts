@@ -34,6 +34,12 @@ const basketSlice = createSlice({
     initialState,
     reducers: {
       add: (state, action) => {
+        console.log('added', state);
+      },
+      remove: (state, action) => {
+        console.log('removed', state);
+      }
+      /*add: (state, action) => {
         return state.map(item => {
           if (item.id !== action.payload.id) {
             return item
@@ -56,7 +62,7 @@ const basketSlice = createSlice({
             added: false
           }
         })
-      }
+      }*/
     }
   })
   
