@@ -31,7 +31,9 @@ const useStyles = makeStyles((theme: Theme) =>
         total: {
             fontWeight: theme.typography.fontWeightBold,
             fontSize: theme.typography.fontSize * 2,
-            color: 'black'
+        },
+        dark: {
+            color: 'white'
         }
     })
 )
@@ -40,10 +42,11 @@ export const Basket = () => {
     const classes = useStyles({})
     const dispatch = useDispatch();
     const products = useSelector((state: State) => state.basket);
+    const islit = useSelector((state: State) => state.themes.value);
 
     return (
         <>
-            <Typography component="h2" variant="h6" color="primary" gutterBottom style={{marginTop: '20px'}}>
+            <Typography component="h2" variant="h6" color="primary" gutterBottom style={{ marginTop: '20px' }}>
                 Shopping Basket
             </Typography>
             <Typography component="p" variant="body1">
@@ -53,42 +56,47 @@ export const Basket = () => {
                 {products
                     .filter(product => product.added)
                     .map((product: ProductItem) => (
-                        <React.Fragment key={product.id}>
-                            <ListItem alignItems="flex-start">
+                        <div key={product.id} style={{ marginTop: '5px' }}>
+                            <ListItem alignItems="flex-start" className="darkM">
                                 <ListItemAvatar>
                                     <Avatar alt="Product" src={product.imageUrl} />
                                 </ListItemAvatar>
-                                <ListItemText
-                                    primary={product.title}
-                                    secondary={
-                                        <React.Fragment>
-                                            <Typography
-                                                component="span"
-                                                variant="body2"
-                                                className={classes.inline}
-                                                color="textPrimary"
-                                            >
-                                                &pound;{(product.price / 100).toFixed(2)}
-                                            </Typography>
-                                            {` — ${product.description}`}
-                                        </React.Fragment>
-                                    }
-                                />
-                                <ListItemSecondaryAction>
-                                    <IconButton
-                                        edge="end"
-                                        aria-label="delete"
-                                        onClick={() => dispatch(remove({ id: product.id }))}
-                                    >
-                                        <DeleteIcon />
-                                    </IconButton>
-                                </ListItemSecondaryAction>
+                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <ListItemText style={{ color: 'black' }}>
+                                        {product.title}
+                                    </ListItemText>
+                                    <ListItemText style={{ display: 'flex', flexDirection: 'row' }}>
+                                        <Typography
+                                            component="span"
+                                            variant="body2"
+                                            className={classes.inline}
+                                            color="textPrimary"
+                                        >
+                                            &pound;{(product.price / 100).toFixed(2)}
+                                        </Typography>
+                                        <Typography
+                                            component="span"
+                                            color="textSecondary"
+                                        >
+                                            &nbsp; ― {product.description}
+                                        </Typography>
+                                    </ListItemText>
+                                    <ListItemSecondaryAction>
+                                        <IconButton
+                                            edge="end"
+                                            aria-label="delete"
+                                            onClick={() => dispatch(remove({ id: product.id }))}
+                                        >
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </ListItemSecondaryAction>
+                                </div>
                             </ListItem>
                             <Divider variant="inset" component="li" />
-                        </React.Fragment>
+                        </div>
                     ))}
                 <ListItem className={classes.listItem}>
-                    <Typography variant="subtitle1" className={classes.total}>
+                    <Typography variant="subtitle1" className={`${classes.total} ${islit ? null : classes.dark}`}>
                         &pound;
                         {(
                             products

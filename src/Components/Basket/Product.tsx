@@ -3,7 +3,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProductItem, State } from '../../Global/Types';
-import Card from '@material-ui/core/Card';
+import { Card, Divider } from '@material-ui/core';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -54,10 +54,11 @@ export function Product() {
                                         {product.title}
                                     </Typography>
                                     <Typography gutterBottom variant="h6" component="h3">
-                                        ${(product.price / 100)}
+                                        £{(product.price / 100)}
                                     </Typography>
                                 </div>
-                                <Typography variant="body2" color={islit?"textSecondary":'primary'} component="p">
+                                <Divider className={islit?'':'dividerTheme'}/>
+                                <Typography variant="body2" color={islit?"textSecondary":'initial'} component="p">
                                     {product.description}
                                 </Typography>
                             </CardContent>

@@ -8,6 +8,11 @@ body {
     overflow-x: hidden;
 }
 
+.dividerTheme {
+    background-color: white !important;
+    margin-bottom: 5px !important;
+}
+
 .dark {
     background-color: black;
     color: white;
@@ -20,6 +25,5 @@ body {
 }
 
 .darkM {
-    color: white !important;
     background-color: white !important;
 }
