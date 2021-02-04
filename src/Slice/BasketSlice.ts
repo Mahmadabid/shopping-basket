@@ -10,7 +10,8 @@ const initialState: ProductItem[] = [
     title: 'Blue t-shirt',
     description: 'No fancy sizing charts here, one t-shirt size to rule them all',
     imageUrl: blueshirt,
-    price: 399
+    price: 399,
+    amount: 0
   },
   {
     id: '456',
@@ -18,14 +19,16 @@ const initialState: ProductItem[] = [
     description:
       'This unique t-shirt is guaranteed to fit nobody, not even new born babies',
     imageUrl: yellowshirt,
-    price: 499
+    price: 499,
+    amount: 0
   },
   {
     id: '789',
     title: 'Red t-shirt',
     description: 'The only product on our site that might actually be worth buying',
     imageUrl: redshirt,
-    price: 799
+    price: 799,
+    amount: 0
   }
 ];
 
@@ -34,13 +37,14 @@ const basketSlice = createSlice({
     initialState,
     reducers: {
       add: (state, action) => {
-        return state.map(item => {
-          if (item.id !== action.payload.id) {
+        return state.map((item) => {
+          if (item.id !== action.payload[0].id) {
             return item
           }
   
           return {
             ...item,
+            amount: action.payload[1],
             added: true
           }
         })

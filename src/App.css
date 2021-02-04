@@ -13,6 +13,14 @@ body {
     margin-bottom: 5px !important;
 }
 
+.amount {
+    color: black !important; 
+    font-size: large !important;
+    height: 30px;
+    min-width: 10px !important;
+    margin-left: 10px !important;
+}
+
 .dark {
     background-color: black;
     color: white;

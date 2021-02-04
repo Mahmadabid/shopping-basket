@@ -9,7 +9,8 @@ import {
     ListItemSecondaryAction,
     IconButton,
     Avatar,
-    Typography
+    Typography,
+    Button
 } from "@material-ui/core"
 import DeleteIcon from "@material-ui/icons/Delete"
 import { useDispatch, useSelector } from "react-redux"
@@ -64,6 +65,9 @@ export const Basket = () => {
                                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                                     <ListItemText style={{ color: 'black' }}>
                                         {product.title}
+                                        <Button variant="contained" disabled className="amount">
+                                            {product.amount}
+                                        </Button>
                                     </ListItemText>
                                     <ListItemText style={{ display: 'flex', flexDirection: 'row' }}>
                                         <Typography
@@ -72,7 +76,7 @@ export const Basket = () => {
                                             className={classes.inline}
                                             color="textPrimary"
                                         >
-                                            &pound;{(product.price / 100).toFixed(2)}
+                                            &pound;{((product.price / 100)* product.amount).toFixed(2)}
                                         </Typography>
                                         <Typography
                                             component="span"
@@ -101,7 +105,7 @@ export const Basket = () => {
                         {(
                             products
                                 .filter(product => product.added)
-                                .reduce((acc, current) => (acc += current.price), 0) / 100
+                                .reduce((acc, current) => (acc += (current.price * current.amount)), 0) / 100
                         ).toFixed(2)}
                     </Typography>
                 </ListItem>

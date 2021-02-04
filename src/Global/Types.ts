@@ -13,5 +13,6 @@ export interface ProductItem {
     description: string
     price: number
     imageUrl: string
+    amount: number
     added?: boolean
   }
