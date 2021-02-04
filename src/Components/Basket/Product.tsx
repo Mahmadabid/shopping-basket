@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,17 +34,16 @@ export function Product() {
     const dispatch = useDispatch();
     const products = useSelector((state: State) => state.basket);
     const islit = useSelector((state: State) => state.themes.value);
-    let [bamount, setbamount] = useState(0);
-    let [ramount, setramount] = useState(0);
-    let [yamount, setyamount] = useState(0);
+    function amount(amount: number) {
+        return amount+=1
+    }
 
     return (
         <div className={classes.root}>
             <Grid className={classes.Grid} container spacing={3} style={{ marginTop: '20px' }}>
                 {products.map((product: ProductItem) =>
                     <Card key={product.id} className={`${classes.Card} ${islit?'':'darks'}`} onClick={() => {
-                        product.id==='123'?setbamount(bamount+=1):product.id==='789'?setramount(ramount+=1):setyamount(yamount+=1)
-                        dispatch(add([product, product.id==='123'?bamount:product.id==='789'?ramount:yamount]))
+                        dispatch(add([product, amount(product.amount)]))
                         }}>
                         <CardActionArea>
                             <CardMedia

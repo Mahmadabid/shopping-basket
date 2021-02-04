@@ -57,6 +57,7 @@ const basketSlice = createSlice({
   
           return {
             ...item,
+            amount: 0,
             added: false
           }
         })
